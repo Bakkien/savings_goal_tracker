@@ -1,3 +1,3 @@
-# savings_goal_tracker
+# Savings Goal Tracker
 
 A new Flutter project.
