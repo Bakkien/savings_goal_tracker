@@ -300,7 +300,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (amountNeeded <= 0) {
       result = 'You have already reached your savings goal!';
     } else {
-      double weeksRequired = (amountNeeded / savingsPerWeek);
+      double weeksRequired = amountNeeded / savingsPerWeek;
       weeksRequired = double.parse(weeksRequired.toStringAsFixed(1));
       result = 'You will reach your savings goal in $weeksRequired weeks.';
     }
