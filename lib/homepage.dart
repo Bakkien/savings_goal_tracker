@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(height: 10),
               TextField(
                 controller: currentAmountController,
-                keyboardType: TextInputType.numberWithOptions(decimal: false),
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
                   labelText: 'RM',
                   hintText: 'XXXX.XX',
