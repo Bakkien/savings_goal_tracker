@@ -55,7 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12.0)),
                     borderSide: BorderSide(
-                      color: isCurrentError ? Colors.red : Colors.grey, // inline if-else statement
+                      // cnoditional expressions
+                      // https://dart.dev/language/operators
+                      color: isCurrentError ? Colors.red : Colors.grey,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
@@ -186,9 +188,6 @@ class _MyHomePageState extends State<MyHomePage> {
     String targetGoalText = targetGoalController.text;
     String savingsPerWeekText = savingsPerWeekController.text;
     double currentAmount, targetGoal, savingsPerWeek;
-    //double currentAmount = double.tryParse(currentAmountText) ?? 0.0;
-    //double targetGoal = double.tryParse(targetGoalText) ?? 0.0;
-    //double savingsPerWeek = double.tryParse(savingsPerWeekText) ?? 0.0;
 
     // make sure the result is empty if got any exceptions
     result = '';
@@ -223,6 +222,7 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
 
+    // check target goal text field validity
     if (targetGoalText.isEmpty) {
       isTargetError = true;
       targetErrorMsg = 'Please enter the field';
@@ -230,6 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return;
     } else {
       try {
+        // check double parsing
         targetGoal = double.parse(targetGoalText);
         if (double.parse((targetGoal * 100).toStringAsFixed(2)) % 1 != 0) {
           isTargetError = true;
@@ -237,13 +238,15 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {});
           return;
         }
+        // check target goal value if less than or equal to 0
         if (targetGoal <= 0) {
           isTargetError = true;
           targetErrorMsg = 'Target goal must be greater than zero.';
           setState(() {});
           return;
         }
-        if (targetGoal <= currentAmount) {
+        // check target goal value if less than current amount value
+        if (targetGoal < currentAmount) {
           isTargetError = true;
           targetErrorMsg =
               'Target goal must be greater than current amount saved.';
@@ -260,6 +263,7 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
 
+    // check savings per week text fielid validity
     if (savingsPerWeekText.isEmpty) {
       isSavingsError = true;
       savingsErrorMsg = 'Please enter the field';
@@ -267,6 +271,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return;
     } else {
       try {
+        // check double parsing
         savingsPerWeek = double.parse(savingsPerWeekText);
         if (double.parse((savingsPerWeek * 100).toStringAsFixed(2)) % 1 != 0) {
           isSavingsError = true;
@@ -274,6 +279,7 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {});
           return;
         }
+        // check savings if less than or equal to 0
         if (savingsPerWeek <= 0) {
           isSavingsError = true;
           savingsErrorMsg = 'Savings per week must be greater than zero.';
@@ -289,13 +295,8 @@ class _MyHomePageState extends State<MyHomePage> {
         return;
       }
     }
-    /*if (currentAmount == 0 || targetGoal == 0 || savingsPerWeek == 0) {
-      SnackBar snackBar = const SnackBar(
-        content: Text('Please enter valid numbers.'),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      return;
-    }*/
+
+    // calculation
     double amountNeeded = targetGoal - currentAmount;
     if (amountNeeded <= 0) {
       result = 'You have already reached your savings goal!';
