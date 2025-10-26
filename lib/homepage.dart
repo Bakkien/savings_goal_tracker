@@ -205,7 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
         currentAmount = double.parse(currentAmountText);
         // check value in 2 decimals
         // reference for solving the problem 10.12 * 100 = 1011.99999999999
-        // https://stackoverflow.com/questions/70778116/in-dart-how-do-you-set-the-number-of-decimals-in-a-double-variable
+        // https://api.dart.dev/stable/2.15.1/dart-core/num/toStringAsFixed.html
         if (double.parse((currentAmount * 100).toStringAsFixed(2)) % 1 != 0) {
           isCurrentError = true;
           currentErrorMsg = 'Please enter amounts maximum two decimal places.';
